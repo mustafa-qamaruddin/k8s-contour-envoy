@@ -1,0 +1,25 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: lovelearnlinux
+  labels:
+    app: lovelearnlinux
+spec:
+  containers:
+    - name: lovelearnlinux
+      image: lovelearnlinux/webserver:v1
+      ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lovelearnlinuxservice
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      nodePort: 30950
+      port: 80
+  selector:
+    app: lovelearnlinux
